@@ -1,0 +1,9 @@
+build/
+out/
+dist/
+.vscode/
+.idea/
+*.user
+*.autosave
+*.db
+*.sqlite
