@@ -3,8 +3,6 @@
 #include <QRandomGenerator>
 #include <QtGlobal>
 
-#include <numeric>
-
 namespace
 {
 double clampValue(double value, double low, double high)
@@ -38,8 +36,8 @@ void GameSimulation::createInitialData()
     for (int i = 0; i < 36; ++i)
     {
         Student student;
-        student.name = surnames.at(rng->bounded(surnames.size()))
-                     + givenNames.at(rng->bounded(givenNames.size()));
+        student.name = surnames.at(rng->bounded(static_cast<int>(surnames.size())))
+                     + givenNames.at(rng->bounded(static_cast<int>(givenNames.size())));
         student.schoolYear = 1 + rng->bounded(3);
         student.score = 55.0 + rng->bounded(36);
         student.potential = 55 + rng->bounded(41);
@@ -72,8 +70,8 @@ void GameSimulation::updateStudents()
         averageManagement += teacher.management;
     }
 
-    averageTeaching /= teachers_.size();
-    averageManagement /= teachers_.size();
+    averageTeaching /= static_cast<double>(teachers_.size());
+    averageManagement /= static_cast<double>(teachers_.size());
 
     auto* rng = QRandomGenerator::global();
 
@@ -139,7 +137,10 @@ void GameSimulation::updateReputation()
 {
     const double scoreComponent = averageScore() * 0.55;
     const double satisfactionComponent = averageSatisfaction() * 0.35;
-    const double scaleComponent = qMin(10.0, students_.size() / 10.0);
+    const double scaleComponent = qMin(
+        10.0,
+        static_cast<double>(students_.size()) / 10.0
+    );
 
     reputation_ = qBound(
         0,
@@ -157,7 +158,7 @@ double GameSimulation::averageScore() const
     for (const auto& student : students_)
         sum += student.score;
 
-    return sum / students_.size();
+    return sum / static_cast<double>(students_.size());
 }
 
 double GameSimulation::averageSatisfaction() const
@@ -169,7 +170,7 @@ double GameSimulation::averageSatisfaction() const
     for (const auto& student : students_)
         sum += student.satisfaction;
 
-    return sum / students_.size();
+    return sum / static_cast<double>(students_.size());
 }
 
 QString GameSimulation::dateText() const
