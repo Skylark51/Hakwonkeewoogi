@@ -23,6 +23,8 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include <functional>
+
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
 {
