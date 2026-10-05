@@ -10,6 +10,7 @@ class QLineEdit;
 class QProgressBar;
 class QStackedWidget;
 class QTableWidget;
+class QTableWidgetItem;
 class QTextBrowser;
 class QWidget;
 
