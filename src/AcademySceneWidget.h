@@ -7,6 +7,10 @@
 #include <QVector>
 #include <QWidget>
 
+class QPainter;
+class QPaintEvent;
+class QResizeEvent;
+
 class AcademySceneWidget : public QWidget
 {
     Q_OBJECT
