@@ -321,6 +321,7 @@ QWidget* MainWindow::createFinanceTab()
     revenueLabel_ = new QLabel();
     payrollLabel_ = new QLabel();
     rentLabel_ = new QLabel();
+    financeNetLabel_ = new QLabel();
 
     grid->addWidget(new QLabel("수강료 매출"), 0, 0);
     grid->addWidget(revenueLabel_, 0, 1);
@@ -329,7 +330,7 @@ QWidget* MainWindow::createFinanceTab()
     grid->addWidget(new QLabel("임대료/고정비"), 2, 0);
     grid->addWidget(rentLabel_, 2, 1);
     grid->addWidget(new QLabel("주간 순손익"), 3, 0);
-    grid->addWidget(weeklyNetLabel_, 3, 1);
+    grid->addWidget(financeNetLabel_, 3, 1);
 
     layout->addWidget(title);
     layout->addWidget(panel);
@@ -372,7 +373,7 @@ void MainWindow::refreshAll()
 void MainWindow::refreshStudents()
 {
     const auto& students = simulation_.students();
-    studentTable_->setRowCount(students.size());
+    studentTable_->setRowCount(static_cast<int>(students.size()));
 
     for (int row = 0; row < students.size(); ++row)
     {
@@ -391,7 +392,7 @@ void MainWindow::refreshStudents()
 void MainWindow::refreshTeachers()
 {
     const auto& teachers = simulation_.teachers();
-    teacherTable_->setRowCount(teachers.size());
+    teacherTable_->setRowCount(static_cast<int>(teachers.size()));
 
     for (int row = 0; row < teachers.size(); ++row)
     {
@@ -413,6 +414,7 @@ void MainWindow::refreshFinance()
     payrollLabel_->setText("- " + money(finance.payroll));
     rentLabel_->setText("- " + money(finance.rent));
     weeklyNetLabel_->setText(money(finance.net));
+    financeNetLabel_->setText(money(finance.net));
 }
 
 QString MainWindow::money(qint64 value)
