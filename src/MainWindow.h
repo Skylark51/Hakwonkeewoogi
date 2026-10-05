@@ -48,4 +48,5 @@ private:
     QLabel* revenueLabel_ = nullptr;
     QLabel* payrollLabel_ = nullptr;
     QLabel* rentLabel_ = nullptr;
+    QLabel* financeNetLabel_ = nullptr;
 };
